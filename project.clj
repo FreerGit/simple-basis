@@ -5,7 +5,8 @@
             :url "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [[org.clojure/clojure "1.11.1"]
                  [thheller/shadow-cljs "2.19.1"]
-                 [http-kit "2.9.0-alpha6"]]
+                 [http-kit "2.9.0-alpha6"]
+                 [com.cnuernber/charred "1.037"]]
   :repl-options {:init-ns app.core}
   :main app.core
   :profiles {:uberjar {:aot :all}})
