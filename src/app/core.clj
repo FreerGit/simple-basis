@@ -1,30 +1,21 @@
 (ns app.core
-  (:require [org.httpkit.client :as http]
-            [charred.api :as json])
-  (:gen-class))
+  (:require [app.window :as window])
+  (:import
+   [org.lwjgl.opengl GL11]))
 
-(defn bybit-url []
-  "https://api.bybit.com")
-
-(defn fetch-tickers []
-  (-> (http/get (str (bybit-url) "/v5/market/tickers")
-                {:query-params {"category" "linear"}})
-      deref
-      :body
-      (json/read-json :key-fn keyword)
-      :result
-      :list
-      (#(map :symbol %))))
-
-(pprint (fetch-tickers))
-
-(def exchanges [fetch-tickers fetch-tickers])
-
-(defn get-all-tickers []
-  (->> exchanges
-       (map #(future {:result (time (%))}))
-       (map deref))) ; blocks until each future resolves
-
-(get-all-tickers)
-
-(fetch-tickers)
+(defn -main []
+  (println "kek")
+  (let [window (window/create-window)
+        cnt (atom 0)
+        red? (atom true)]
+    (prn window)
+    (println "Running main loop")
+    (window/run-render-loop
+     (fn []
+       (when (zero? (mod @cnt 60))
+         (swap! red? not))
+       (if @red? (GL11/glClearColor 1.0 0.0 0.0 1.0)
+           (GL11/glClearColor 0.0 1.0 0.0 1.0))
+       (swap! cnt inc)) window)
+    (window/cleanup-window window)
+    (println "Cleaned up")))
