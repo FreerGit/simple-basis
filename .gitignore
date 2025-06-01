@@ -15,3 +15,7 @@ pom.xml.asc
 .lsp
 .calva
 .shadow-cljs
+
+# Emacs files
+*~
+#*#

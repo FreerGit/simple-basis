@@ -14,6 +14,10 @@
                  [org.lwjgl/lwjgl-opengl "3.3.3"]
                  [org.lwjgl/lwjgl-opengl "3.3.3" :classifier "natives-linux"]
                  [http-kit "2.9.0-alpha6"]
+                 [missionary "b.45"]
+                 [aleph "0.8.3"]
+                 [manifold "0.4.3"]
+                 [pjson "1.0.0"]
                  [com.cnuernber/charred "1.037"]]
   :repl-options {:init-ns app.core}
   :main app.core
